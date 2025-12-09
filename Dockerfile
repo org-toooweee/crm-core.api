@@ -1,5 +1,8 @@
-FROM node:25
-RUN corepack enable && corepack prepare pnpm@latest --activate
+FROM node:24-slim
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm i --frozen-lockfile
+COPY package*.json ./
+RUN npm ci
+COPY . ./
+RUN npm run build
+EXPOSE 3000
+CMD ["node", "dist/main.js"]

@@ -96,3 +96,17 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Commands
+
+1. `docker ps` - list of docker containers
+2. `docker image ls` - list of docker images
+3. `docker exec -it 'container-name' bash` - open bash in container
+4. `docker rm 'name' -f` - removes container
+5. `docker image rm 'id'` - removes an image
+6. `docker build -t 'name' .` - builds an image from a Dockerfile
+7. `docker run -v ${pwd}:/app -p 3000:3000 -d --name crm-core.api crm-core.api-image` - creates container from image, exposes port 3000 and free terminal. binding mount.
+8. `cat` - open file 
+9. `ls` - list of files
+10. `${pwd}` - powershells currentdir
+11. `$(pwd)` - linuxs currentdir
