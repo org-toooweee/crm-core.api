@@ -1,8 +1,7 @@
-FROM node:24-slim
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . ./
-RUN npm run build
-EXPOSE 3000
-CMD ["node", "dist/main.js"]
+# Enable pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+RUN corepack prepare pnpm@10.17.0 --activate
+
+
