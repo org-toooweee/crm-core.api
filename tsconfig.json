@@ -24,8 +24,8 @@
     "paths": {
       "@libs": ["src/libs"],
       "@libs/*": ["src/libs/*"],
-      "@infrastructure": ["src/infrastructure"],
-      "@infrastructure/*": ["src/infrastructure/*"]
+      "@infra": ["src/infra"],
+      "@infra/*": ["src/infra/*"]
     }
   }
 }

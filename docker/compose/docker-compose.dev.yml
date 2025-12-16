@@ -1,12 +1,12 @@
 services:
   pg:
     env_file:
-      - ../../.env.development
+      - ../../.env.dev
 
   redis:
     env_file:
-      - ../../.env.development
+      - ../../.env.dev
 
   redis-insight:
     env_file:
-      - ../../.env.development
+      - ../../.env.dev

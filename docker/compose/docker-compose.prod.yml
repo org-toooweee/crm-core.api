@@ -1,14 +1,14 @@
 services:
   pg:
     env_file:
-      - ../../.env.production
+      - ../../.env.prod
     ports: []
 
   pg-admin:
     image: dpage/pgadmin4:9.11.0
     restart: unless-stopped
     env_file:
-      - ../../.env.production
+      - ../../.env.prod
     ports: []
     depends_on:
       - pg
@@ -17,12 +17,12 @@ services:
 
   redis:
     env_file:
-      - ../../.env.production
+      - ../../.env.prod
     ports: []
 
   redis-insight:
     env_file:
-      - ../../.env.production
+      - ../../.env.prod
     ports: []
 
 volumes:
