@@ -1,0 +1,29 @@
+services:
+  pg:
+    env_file:
+      - ../../.env.production
+    ports: []
+
+  pg-admin:
+    image: dpage/pgadmin4:9.11.0
+    restart: unless-stopped
+    env_file:
+      - ../../.env.production
+    ports: []
+    depends_on:
+      - pg
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin/data
+
+  redis:
+    env_file:
+      - ../../.env.production
+    ports: []
+
+  redis-insight:
+    env_file:
+      - ../../.env.production
+    ports: []
+
+volumes:
+  pgadmin_data:
