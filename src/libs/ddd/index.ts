@@ -1,1 +1,2 @@
-export * from "./base.entity"
+export * from './entity';
+export * from './aggregate-root';
