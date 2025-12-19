@@ -30,6 +30,7 @@ export abstract class Entity<EntityProps> {
     this._createdAt = createdAt || now;
     this._updatedAt = updatedAt || now;
     this.props = props;
+    this.validate();
   }
 
   get id() {
