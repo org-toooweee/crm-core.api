@@ -78,4 +78,6 @@ export abstract class Entity<EntityProps> {
 
     return Object.freeze(propsCopy);
   }
+
+  abstract validate(): void;
 }
