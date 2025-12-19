@@ -1,7 +1,5 @@
 services:
   pg:
-    env_file:
-      - ../../.env.prod
     ports: []
 
   pg-admin:
@@ -16,13 +14,9 @@ services:
       - pgadmin_data:/var/lib/pgadmin/data
 
   redis:
-    env_file:
-      - ../../.env.prod
     ports: []
 
   redis-insight:
-    env_file:
-      - ../../.env.prod
     ports: []
 
 volumes:
