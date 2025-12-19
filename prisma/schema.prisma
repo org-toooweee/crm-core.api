@@ -1,0 +1,32 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../generated/prisma"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["iam_schema"]
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
+  token    Token[]
+
+  @@map("users")
+  @@schema("iam_schema")
+}
+
+model Token {
+  token     String   @unique
+  expiresAt DateTime @map("expires_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @map("user_id")
+  userAgent String   @map("user_agent")
+
+  @@unique([userId, userAgent])
+  @@map("tokens")
+  @@schema("iam_schema")
+}
