@@ -72,9 +72,9 @@ export abstract class Entity<EntityProps> {
   getProps(): EntityProps & BaseEntityProps {
     const propsCopy = {
       id: this.id,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
       ...this.props,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
     };
 
     return Object.freeze(propsCopy);

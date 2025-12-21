@@ -8,11 +8,23 @@ datasource db {
   schemas  = ["iam_schema"]
 }
 
+enum Role {
+  USER
+  ADMIN
+
+  @@map("roles")
+  @@schema("iam_schema")
+}
+
 model User {
   id       String  @id @default(uuid())
   email    String  @unique
   password String
+  role     Role    @default(USER)
   token    Token[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("users")
   @@schema("iam_schema")
@@ -24,6 +36,9 @@ model Token {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String   @map("user_id")
   userAgent String   @map("user_agent")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@unique([userId, userAgent])
   @@map("tokens")
