@@ -1,7 +1,7 @@
 import { BaseException } from '@libs/exceptions/exception.base';
 
 export class ArgumentInvalidException extends BaseException {
-  readonly code = 'ARGUMENT_INVALID';
+  readonly code = 400;
 
   constructor(
     message = 'Invalid argument provided',
@@ -12,7 +12,7 @@ export class ArgumentInvalidException extends BaseException {
 }
 
 export class ArgumentOutOfRangeException extends BaseException {
-  readonly code = 'ARGUMENT_OUT_OF_RANGE';
+  readonly code = 422;
 
   constructor(
     message = 'Argument is out of allowed range',
@@ -23,7 +23,7 @@ export class ArgumentOutOfRangeException extends BaseException {
 }
 
 export class NotFoundException extends BaseException {
-  readonly code = 'NOT_FOUND';
+  readonly code = 404;
 
   constructor(
     message = 'Resource not found',
@@ -34,7 +34,7 @@ export class NotFoundException extends BaseException {
 }
 
 export class ConflictException extends BaseException {
-  readonly code = 'CONFLICT';
+  readonly code = 409;
 
   constructor(
     message = 'Resource conflict occurred',
@@ -45,7 +45,7 @@ export class ConflictException extends BaseException {
 }
 
 export class UnauthorizedException extends BaseException {
-  readonly code = 'UNAUTHORIZED';
+  readonly code = 401;
 
   constructor(
     message = 'Unauthorized access',
@@ -56,7 +56,7 @@ export class UnauthorizedException extends BaseException {
 }
 
 export class ForbiddenException extends BaseException {
-  readonly code = 'FORBIDDEN';
+  readonly code = 403;
 
   constructor(
     message = 'Forbidden access',
@@ -67,7 +67,7 @@ export class ForbiddenException extends BaseException {
 }
 
 export class ValidationException extends BaseException {
-  readonly code = 'VALIDATION_FAILED';
+  readonly code = 422;
 
   constructor(
     public readonly errors: string[] | Record<string, string[]>,
@@ -78,7 +78,7 @@ export class ValidationException extends BaseException {
 }
 
 export class BadRequestException extends BaseException {
-  readonly code = 'BAD_REQUEST';
+  readonly code = 400;
 
   constructor(message = 'Bad request', metadata?: Record<string, unknown>) {
     super(message, metadata);

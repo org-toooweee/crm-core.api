@@ -1,5 +1,5 @@
 export abstract class BaseException extends Error {
-  abstract readonly code: string;
+  abstract readonly code: number;
 
   protected constructor(
     readonly message: string,
@@ -12,9 +12,9 @@ export abstract class BaseException extends Error {
 
   toHttpResponse() {
     return {
-      error: this.name,
       message: this.message,
-      code: this.code,
+      statusCode: this.code,
+      error: this.name,
       ...(this.metadata && { metadata: this.metadata }),
     };
   }

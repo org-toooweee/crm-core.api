@@ -3,7 +3,7 @@ import { UserRepositoryPort } from './user.repository.port';
 import { PrismaService } from '@infra/prisma/prisma.service';
 import { UserMapper } from '../../mappers/user.mapper';
 import { UserEntity } from '../../domain/user/entities/user.entity';
-import { Role } from '../../../../../generated/prisma/enums';
+import { Role } from '@prisma-client/enums';
 
 @Injectable()
 export class UserRepository implements UserRepositoryPort {

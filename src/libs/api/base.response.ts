@@ -11,7 +11,7 @@ export class BaseResponse extends IdResponse {
   constructor(props: BaseResponseProps) {
     super(props.id);
     this.createdAt = new Date(props.createdAt).toISOString();
-    this.updatedAt = new Date(props.createdAt).toISOString();
+    this.updatedAt = new Date(props.updatedAt).toISOString();
   }
 
   @ApiProperty({ example: '2025-11-24T17:43:15.970Z' })

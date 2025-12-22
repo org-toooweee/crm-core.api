@@ -1,7 +1,7 @@
 import { Mapper } from '@libs/ddd';
 import { UserEntity } from '../domain/user/entities/user.entity';
 import { UserResponseDto } from '../dtos/user/user-response.dto';
-import { Prisma, Role } from '../../../../generated/prisma/client';
+import { Prisma, Role } from '@prisma-client/client';
 
 type UserDBRecord = Prisma.UserGetPayload<object>;
 
@@ -36,7 +36,7 @@ export class UserMapper implements Mapper<
     const props = entity.getProps();
     const response = new UserResponseDto(props);
     response.email = props.email.value;
-    response.role = props.email.value;
+    response.role = props.role.value;
     response.createdAt = props.createdAt.toString();
     response.updatedAt = props.updatedAt.toString();
     return response;
