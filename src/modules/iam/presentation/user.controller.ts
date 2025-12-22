@@ -6,7 +6,6 @@ import { CreateUserDto } from '../dtos/user/create-user.dto';
 import { UserReadModel } from '../application/user/queries/user.read-model';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseExceptionsFilter } from '@infra/exception-filters/base-exceptions.filter';
-import { CreateUserCommandHandler } from '../application/user/commands/create-user.command-handler';
 
 @Controller('users')
 @ApiTags('Users')

@@ -2,4 +2,6 @@ import { RefreshTokenEntity } from '../../domain/refresh-token/entities/refresh-
 
 export interface RefreshTokenRepositoryPort {
   findByToken(): Promise<RefreshTokenEntity | null>;
+  upsert(): Promise<string>;
+  delete(): Promise<string>;
 }
