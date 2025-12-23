@@ -14,7 +14,7 @@ export interface CreateEntityProps<T> {
 }
 
 export abstract class Entity<EntityProps> {
-  protected abstract _id: AggregateId;
+  protected _id: AggregateId;
   protected readonly props: EntityProps;
   private readonly _createdAt: Date;
   private _updatedAt: Date;

@@ -14,8 +14,6 @@ export abstract class BaseException extends Error {
     return {
       message: this.message,
       statusCode: this.code,
-      error: this.name,
-      ...(this.metadata && { metadata: this.metadata }),
     };
   }
 }

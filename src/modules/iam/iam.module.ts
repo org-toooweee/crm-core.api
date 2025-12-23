@@ -15,6 +15,8 @@ import { PasswordHash } from './infra/password-hash/password-hash';
 import { JwtModule } from '@nestjs/jwt';
 import { EnvModule } from '@infra/env/env.module';
 import { EnvService } from '@infra/env/env.service';
+import { AuthController } from './presentation/auth.controller';
+import { RegisterCommandHandler } from './application/auth/commands/register/register.command-handler';
 
 @Module({
   imports: [
@@ -31,10 +33,11 @@ import { EnvService } from '@infra/env/env.service';
       inject: [EnvService],
     }),
   ],
-  controllers: [UserController],
+  controllers: [UserController, AuthController],
   providers: [
     CreateUserCommandHandler,
     FindUsersQueryHandler,
+    RegisterCommandHandler,
     UserMapper,
     {
       provide: USER_REPOSITORY,

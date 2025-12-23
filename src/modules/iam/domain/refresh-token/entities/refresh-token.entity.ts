@@ -5,8 +5,6 @@ import {
 } from '../types/token.types';
 
 export class RefreshTokenEntity extends AggregateRoot<RefreshTokenProps> {
-  protected _id: AggregateId;
-
   private constructor(id: AggregateId, props: RefreshTokenProps) {
     super({ id, props });
   }

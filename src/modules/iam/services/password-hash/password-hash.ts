@@ -1,4 +1,4 @@
-import { PasswordHashPort } from './password-hash-port';
+import { PasswordHashPort } from './password-hash.port';
 import * as argon from 'argon2';
 import { Injectable } from '@nestjs/common';
 

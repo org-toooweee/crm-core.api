@@ -4,8 +4,6 @@ import { UserEmail } from '../value-objects/user-email.vo';
 import { UserRole } from '../value-objects/user-role.vo';
 
 export class UserEntity extends AggregateRoot<UserProps> {
-  protected readonly _id: AggregateId;
-
   private constructor(id: AggregateId, props: UserProps) {
     super({ id, props });
   }

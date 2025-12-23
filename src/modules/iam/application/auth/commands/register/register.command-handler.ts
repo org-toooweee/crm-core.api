@@ -37,6 +37,7 @@ export class RegisterCommandHandler implements ICommandHandler<RegisterCommand> 
     }
 
     const userId = randomUUID();
+    console.log('userId', userId);
     const hashedPassword = await this.passwordHash.hash(password);
 
     const userEntity = UserEntity.create({
@@ -44,6 +45,8 @@ export class RegisterCommandHandler implements ICommandHandler<RegisterCommand> 
       email,
       password: hashedPassword,
     });
+
+    console.log(userEntity);
 
     await this.userRepository.insert(userEntity);
 
@@ -58,9 +61,20 @@ export class RegisterCommandHandler implements ICommandHandler<RegisterCommand> 
       expiresAt: new Date(),
     });
 
+    console.log(refreshTokenEntity);
+
     await this.refreshTokenRepository.upsert(refreshTokenEntity);
 
+    const payload = {
+      sub: userId,
+      email,
+      role: userEntity.getProps().role,
+    };
+
+    const accessToken = await this.jwtService.signAsync(payload);
+
     return {
+      accessToken,
       refreshToken: refreshTokenEntity.getProps().token,
     };
   }
