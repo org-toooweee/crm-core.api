@@ -1,14 +1,17 @@
 import { AggregateId, AggregateRoot } from '@libs/ddd';
-import { CreateTokenProps, TokenProps } from '../types/token.types';
+import {
+  CreateRefreshTokenProps,
+  RefreshTokenProps,
+} from '../types/token.types';
 
-export class RefreshTokenEntity extends AggregateRoot<TokenProps> {
+export class RefreshTokenEntity extends AggregateRoot<RefreshTokenProps> {
   protected _id: AggregateId;
 
-  private constructor(id: AggregateId, props: TokenProps) {
+  private constructor(id: AggregateId, props: RefreshTokenProps) {
     super({ id, props });
   }
 
-  static create(props: CreateTokenProps) {
+  static create(props: CreateRefreshTokenProps): RefreshTokenEntity {
     const { id, ...tokenProps } = props;
 
     return new RefreshTokenEntity(id, tokenProps);

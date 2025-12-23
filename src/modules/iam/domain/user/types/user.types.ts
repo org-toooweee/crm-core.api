@@ -1,4 +1,3 @@
-import { AggregateId } from '@libs/ddd';
 import { UserEmail } from '../value-objects/user-email.vo';
 import { UserRole } from '../value-objects/user-role.vo';
 
@@ -9,7 +8,7 @@ export interface UserProps {
 }
 
 export interface CreateUserProps {
-  id: AggregateId;
+  id: string;
   email: string;
   password: string;
   role?: string;

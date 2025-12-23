@@ -8,6 +8,9 @@ export const envSchema = z.object({
   PGADMIN_DEFAULT_EMAIL: z.string(),
   PGADMIN_DEFAULT_PASSWORD: z.string(),
   DATABASE_URL: z.string(),
+  JWT_SECRET: z.string(),
+  JWT_AT_EXPIRES: z.string(),
+  JWT_RT_EXPIRES: z.string(),
 });
 
 export type Env = z.infer<typeof envSchema>;
