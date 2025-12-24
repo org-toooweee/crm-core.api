@@ -1,9 +1,9 @@
-import { PasswordHashPort } from './password-hash.port';
 import * as argon from 'argon2';
 import { Injectable } from '@nestjs/common';
+import { PasswordServicePort } from '../../application/auth/ports/password-service.port';
 
 @Injectable()
-export class PasswordHash implements PasswordHashPort {
+export class ArgonPasswordService implements PasswordServicePort {
   async hash(password: string) {
     return argon.hash(password);
   }

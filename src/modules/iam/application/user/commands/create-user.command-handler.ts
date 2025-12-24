@@ -1,10 +1,10 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateUserCommand } from './create-user.command';
-import { type UserRepositoryPort } from '../../../database/user/user.repository.port';
+import { type UserRepositoryPort } from '../../../infra/user/user.repositories.port';
 import { UserEntity } from '../../../domain/user/entities/user.entity';
 import { randomUUID } from 'crypto';
 import { Inject } from '@nestjs/common';
-import { USER_REPOSITORY } from '../../../di-tokens/user.di-tokens';
+import { USER_REPOSITORY } from '../../../di-tokens/di-tokens';
 import { UserAlreadyExistsException } from '../../../domain/user/exceptions/user.exceptions';
 
 @CommandHandler(CreateUserCommand)

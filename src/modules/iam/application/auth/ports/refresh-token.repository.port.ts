@@ -1,4 +1,4 @@
-import { RefreshTokenEntity } from '../../domain/refresh-token/entities/refresh-token.entity';
+import { RefreshTokenEntity } from '../../../domain/refresh-token/entities/refresh-token.entity';
 
 export interface RefreshTokenRepositoryPort {
   findByToken(token: string): Promise<RefreshTokenEntity | null>;

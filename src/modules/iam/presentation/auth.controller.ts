@@ -1,8 +1,8 @@
 import { Body, Controller, Post, UseFilters } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { AuthDto } from '../dtos/auth/auth.dto';
 import { RegisterCommand } from '../application/auth/commands/register/register.command';
 import { BaseExceptionsFilter } from '@infra/exception-filters/base-exceptions.filter';
+import { AuthDto } from './dto/auth/auth.dto';
 
 @Controller('auth')
 @UseFilters(new BaseExceptionsFilter())

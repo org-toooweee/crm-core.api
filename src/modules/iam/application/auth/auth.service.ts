@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { RefreshTokenRepositoryPort } from '../../database/refresh-token/refresh-token.repository.port';
-import { TOKEN_REPOSITORY } from '../../di-tokens/user.di-tokens';
+import { RefreshTokenRepositoryPort } from '../../infra/refresh-token/refresh-token.repositories.port';
+import { TOKEN_REPOSITORY } from '../../di-tokens/di-tokens';
 
 @Injectable()
 export class AuthService {

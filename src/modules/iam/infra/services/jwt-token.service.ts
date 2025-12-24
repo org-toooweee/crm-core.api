@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { JwtTokenServicePort } from './jwt-token.service.port';
 import { JwtService } from '@nestjs/jwt';
+import { JwtTokenServicePort } from '../../application/auth/ports/jwt-token.service.port';
 
 @Injectable()
 export class JwtTokenService implements JwtTokenServicePort {

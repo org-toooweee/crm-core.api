@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserRoles } from '../../domain/user/types/user.types';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { UserRoles } from '../../../domain/user/types/user.types';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'user@gmail.com' })

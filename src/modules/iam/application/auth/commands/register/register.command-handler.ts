@@ -2,18 +2,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { RegisterCommand } from './register.command';
 import { Inject } from '@nestjs/common';
 import {
-  PASSWORD_HASH,
+  PASSWORD_SERVICE,
   TOKEN_REPOSITORY,
   USER_REPOSITORY,
-} from '../../../../di-tokens/user.di-tokens';
-import { UserRepositoryPort } from '../../../../database/user/user.repository.port';
+} from '../../../../di-tokens/di-tokens';
 import { UserAlreadyExistsException } from '../../../../domain/user/exceptions/user.exceptions';
-import { PasswordHashPort } from '../../../../infra/password-hash/password-hash-port';
-import { RefreshTokenRepositoryPort } from '../../../../database/refresh-token/refresh-token.repository.port';
 import { UserEntity } from '../../../../domain/user/entities/user.entity';
 import { randomUUID } from 'crypto';
 import { RefreshTokenEntity } from '../../../../domain/refresh-token/entities/refresh-token.entity';
 import { JwtService } from '@nestjs/jwt';
+import { UserRepositoryPort } from '../../../user/ports/user.repository.port';
+import { RefreshTokenRepositoryPort } from '../../ports/refresh-token.repository.port';
+import { PasswordServicePort } from '../../ports/password-service.port';
 
 @CommandHandler(RegisterCommand)
 export class RegisterCommandHandler implements ICommandHandler<RegisterCommand> {
@@ -22,8 +22,8 @@ export class RegisterCommandHandler implements ICommandHandler<RegisterCommand> 
     private readonly userRepository: UserRepositoryPort,
     @Inject(TOKEN_REPOSITORY)
     private readonly refreshTokenRepository: RefreshTokenRepositoryPort,
-    @Inject(PASSWORD_HASH)
-    private readonly passwordHash: PasswordHashPort,
+    @Inject(PASSWORD_SERVICE)
+    private readonly passwordHash: PasswordServicePort,
     private readonly jwtService: JwtService,
   ) {}
 
