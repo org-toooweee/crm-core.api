@@ -2,10 +2,10 @@ import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateUserCommand } from '../application/user/commands/create-user.command';
 import { FindUsersQuery } from '../application/user/queries/find-users.query';
-import { CreateUserDto } from '../dtos/user/create-user.dto';
 import { UserReadModel } from '../application/user/queries/user.read-model';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseExceptionsFilter } from '@infra/exception-filters/base-exceptions.filter';
+import { CreateUserDto } from './dto/user/create-user.dto';
 
 @Controller('users')
 @ApiTags('Users')

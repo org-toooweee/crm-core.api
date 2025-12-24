@@ -8,7 +8,6 @@ import {
 import { UserController } from './presentation/user.controller';
 import { CreateUserCommandHandler } from './application/user/commands/create-user.command-handler';
 import { FindUsersQueryHandler } from './application/user/queries/find-users.query-handler';
-import { UserMapper } from './mappers/user.mapper';
 import { CqrsModule } from '@nestjs/cqrs';
 import { JwtModule } from '@nestjs/jwt';
 import { EnvModule } from '@infra/env/env.module';
@@ -19,6 +18,8 @@ import { UserRepository } from './infra/repositories';
 import { RefreshTokenRepository } from './infra/repositories';
 import { ArgonPasswordService } from './infra/services';
 import { JwtTokenService } from './infra/services';
+import { UserPersistenceMapper } from './infra/mappers/user.persistence.mapper';
+import { UserResponseMapper } from './presentation/mappers/user.response.mapper';
 
 @Module({
   imports: [
@@ -40,7 +41,8 @@ import { JwtTokenService } from './infra/services';
     CreateUserCommandHandler,
     FindUsersQueryHandler,
     RegisterCommandHandler,
-    UserMapper,
+    UserPersistenceMapper,
+    UserResponseMapper,
     {
       provide: USER_REPOSITORY,
       useClass: UserRepository,

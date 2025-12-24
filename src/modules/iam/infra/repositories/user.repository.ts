@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@infra/prisma/prisma.service';
-import { UserMapper } from '../../mappers/user.mapper';
 import { UserEntity } from '../../domain/user/entities/user.entity';
 import { Role } from '@prisma-client/enums';
 import { UserRepositoryPort } from '../../application/user/ports/user.repository.port';
+import { UserPersistenceMapper } from '../mappers/user.persistence.mapper';
 
 @Injectable()
 export class UserRepository implements UserRepositoryPort {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly mapper: UserMapper,
+    private readonly mapper: UserPersistenceMapper,
   ) {}
 
   async insert(entity: UserEntity) {

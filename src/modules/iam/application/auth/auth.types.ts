@@ -9,9 +9,7 @@ export interface JwtPayload {
   role: string;
 }
 
-export type JwtVerifiedPayload =
-  | (JwtPayload & {
-      iat: string;
-      exp: string;
-    })
-  | null;
+export type JwtVerifiedPayload = JwtPayload & {
+  iat: string;
+  exp: string;
+};

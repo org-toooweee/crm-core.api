@@ -1,14 +1,12 @@
-import { Mapper } from '@libs/ddd';
-import { UserEntity } from '../domain/user/entities/user.entity';
-import { UserResponseDto } from '../dtos/user/user-response.dto';
+import { PersistenceMapper } from '@libs/ddd';
 import { Prisma, Role } from '@prisma-client/client';
+import { UserEntity } from '../../domain/user/entities/user.entity';
 
 type UserDBRecord = Prisma.UserGetPayload<object>;
 
-export class UserMapper implements Mapper<
+export class UserPersistenceMapper implements PersistenceMapper<
   UserEntity,
-  UserDBRecord,
-  UserResponseDto
+  UserDBRecord
 > {
   toPersistence(entity: UserEntity): UserDBRecord {
     const role = entity.getProps().role.value as Role;
@@ -30,15 +28,5 @@ export class UserMapper implements Mapper<
       password: record.password,
       role: record.role,
     });
-  }
-
-  toResponse(entity: UserEntity): UserResponseDto {
-    const props = entity.getProps();
-    const response = new UserResponseDto(props);
-    response.email = props.email.value;
-    response.role = props.role.value;
-    response.createdAt = props.createdAt.toString();
-    response.updatedAt = props.updatedAt.toString();
-    return response;
   }
 }
