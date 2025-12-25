@@ -1,6 +1,6 @@
 export class LoginCommand {
   constructor(
-    private readonly email: string,
-    private readonly password: string,
+    readonly email: string,
+    readonly password: string,
   ) {}
 }

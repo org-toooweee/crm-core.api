@@ -7,3 +7,13 @@ export class InvalidCredentialsException extends BaseException {
     super('Invalid credentials');
   }
 }
+
+export class RefreshTokenExpiredException extends BaseException {
+  code = 401;
+
+  constructor() {
+    super('Unauthorized');
+  }
+}
+
+export class RefreshTokenNotFoundException extends RefreshTokenExpiredException {}

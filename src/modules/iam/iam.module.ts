@@ -20,6 +20,7 @@ import { ArgonPasswordService } from './infra/services';
 import { JwtTokenService } from './infra/services';
 import { UserPersistenceMapper } from './infra/mappers/user.persistence.mapper';
 import { UserResponseMapper } from './presentation/mappers/user.response.mapper';
+import { AuthService } from './application/auth/auth.service';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { UserResponseMapper } from './presentation/mappers/user.response.mapper'
     RegisterCommandHandler,
     UserPersistenceMapper,
     UserResponseMapper,
+    AuthService,
     {
       provide: USER_REPOSITORY,
       useClass: UserRepository,

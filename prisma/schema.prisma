@@ -5,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  schemas  = ["iam_schema"]
+  schemas  = ["iam_schema", "employee_schema"]
 }
 
 enum Role {
@@ -44,4 +44,45 @@ model Token {
   @@unique([userId, userAgent])
   @@map("tokens")
   @@schema("iam_schema")
+}
+
+model Employee {
+  id     String @id @default(uuid())
+  userId String @unique @map("user_id")
+  tasks  Task[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("employees")
+  @@schema("employee_schema")
+}
+
+model Task {
+  id             String     @id @default(uuid())
+  employee       Employee   @relation(fields: [assignedToId], references: [id])
+  assignedToId   String     @map("assigned_to_id")
+  assignedFromId String     @map("assigned_from_id")
+  startTime      DateTime   @map("start_time")
+  endTime        DateTime   @map("end_time")
+  status         TaskStatus @relation(fields: [statusId], references: [id])
+  statusId       String     @map("task_status_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tasks")
+  @@schema("employee_schema")
+}
+
+model TaskStatus {
+  id    String @id @default(uuid())
+  name  String @unique
+  tasks Task[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("task_statuses")
+  @@schema("employee_schema")
 }

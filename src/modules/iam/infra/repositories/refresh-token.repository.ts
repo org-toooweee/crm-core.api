@@ -27,9 +27,7 @@ export class RefreshTokenRepository implements RefreshTokenRepositoryPort {
       },
     });
 
-    return {
-      refreshToken: newToken.token,
-    };
+    return this.toDomain(newToken);
   }
 
   async findByToken(token: string) {

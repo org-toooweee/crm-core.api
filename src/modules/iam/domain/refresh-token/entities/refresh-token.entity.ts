@@ -15,5 +15,9 @@ export class RefreshTokenEntity extends AggregateRoot<RefreshTokenProps> {
     return new RefreshTokenEntity(id, tokenProps);
   }
 
+  isExpired() {
+    return this.getProps().expiresAt < new Date();
+  }
+
   validate() {}
 }
