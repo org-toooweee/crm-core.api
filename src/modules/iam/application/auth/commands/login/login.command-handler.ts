@@ -9,7 +9,7 @@ import {
   USER_REPOSITORY,
 } from '../../../../di-tokens/di-tokens';
 import { PasswordServicePort } from '../../ports/password-service.port';
-import { InvalidCredentialsException } from '../../../../domain/refresh-token/exceptions/auth.exceptions';
+import { InvalidCredentialsException } from '../../../../domain/auth/exceptions/auth.exceptions';
 
 @CommandHandler(LoginCommand)
 export class LoginCommandHandler implements ICommandHandler<
@@ -31,7 +31,7 @@ export class LoginCommandHandler implements ICommandHandler<
 
     if (
       !user ||
-      (await this.passwordService.compare(user.getProps().password, password))
+      !(await this.passwordService.compare(user.getProps().password, password))
     ) {
       throw new InvalidCredentialsException();
     }
@@ -42,8 +42,6 @@ export class LoginCommandHandler implements ICommandHandler<
       role: user.getProps().role.value,
     };
 
-    const tokens = await this.authService.refreshTokens('', payload, '');
-
-    return tokens;
+    return await this.authService.refreshTokens(payload, '');
   }
 }

@@ -15,5 +15,3 @@ export class RefreshTokenExpiredException extends BaseException {
     super('Unauthorized');
   }
 }
-
-export class RefreshTokenNotFoundException extends RefreshTokenExpiredException {}

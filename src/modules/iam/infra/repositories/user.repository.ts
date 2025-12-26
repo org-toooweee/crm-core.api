@@ -47,4 +47,18 @@ export class UserRepository implements UserRepositoryPort {
 
     return this.mapper.toDomain(user);
   }
+
+  async findById(id: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return this.mapper.toDomain(user);
+  }
 }

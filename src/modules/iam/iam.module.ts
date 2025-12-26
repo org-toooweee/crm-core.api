@@ -13,7 +13,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { EnvModule } from '@infra/env/env.module';
 import { EnvService } from '@infra/env/env.service';
 import { AuthController } from './presentation/auth.controller';
-import { RegisterCommandHandler } from './application/auth/commands/register/register.command-handler';
 import { UserRepository } from './infra/repositories';
 import { RefreshTokenRepository } from './infra/repositories';
 import { ArgonPasswordService } from './infra/services';
@@ -21,6 +20,7 @@ import { JwtTokenService } from './infra/services';
 import { UserPersistenceMapper } from './infra/mappers/user.persistence.mapper';
 import { UserResponseMapper } from './presentation/mappers/user.response.mapper';
 import { AuthService } from './application/auth/auth.service';
+import { LoginCommandHandler } from './application/auth/commands/login/login.command-handler';
 
 @Module({
   imports: [
@@ -41,7 +41,7 @@ import { AuthService } from './application/auth/auth.service';
   providers: [
     CreateUserCommandHandler,
     FindUsersQueryHandler,
-    RegisterCommandHandler,
+    LoginCommandHandler,
     UserPersistenceMapper,
     UserResponseMapper,
     AuthService,

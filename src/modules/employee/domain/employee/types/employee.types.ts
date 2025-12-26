@@ -6,7 +6,6 @@ export interface CreateEmployeeProps {
   patronymic: string;
   employmentDate: Date;
   birthdayDate: Date;
-  department: string;
   isFired: boolean;
   userId: string;
 }

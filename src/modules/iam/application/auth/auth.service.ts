@@ -3,12 +3,8 @@ import { JWT_TOKEN_SERVICE, TOKEN_REPOSITORY } from '../../di-tokens/di-tokens';
 import { RefreshTokenRepositoryPort } from './ports/refresh-token.repository.port';
 import { JwtPayload } from './auth.types';
 import { JwtTokenServicePort } from './ports/jwt-token.service.port';
-import { RefreshTokenEntity } from '../../domain/refresh-token/entities/refresh-token.entity';
 import { randomUUID } from 'crypto';
-import {
-  RefreshTokenExpiredException,
-  RefreshTokenNotFoundException,
-} from '../../domain/refresh-token/exceptions/auth.exceptions';
+import { RefreshTokenEntity } from '../../domain/auth/entities/refresh-token.entity';
 
 @Injectable()
 export class AuthService {
@@ -19,17 +15,7 @@ export class AuthService {
     private readonly refreshTokenRepository: RefreshTokenRepositoryPort,
   ) {}
 
-  async refreshTokens(token: string, payload: JwtPayload, userAgent: string) {
-    const tokenFromDb = await this.refreshTokenRepository.findByToken(token);
-
-    if (!tokenFromDb) {
-      throw new RefreshTokenNotFoundException();
-    }
-
-    if (tokenFromDb.isExpired()) {
-      throw new RefreshTokenExpiredException();
-    }
-
+  async refreshTokens(payload: JwtPayload, userAgent: string) {
     const tokens = await this.jwtService.generateTokens(payload);
 
     const refreshToken = RefreshTokenEntity.create({
@@ -42,9 +28,6 @@ export class AuthService {
 
     await this.refreshTokenRepository.upsert(refreshToken);
 
-    return {
-      accessToken: tokens.accessToken,
-      refreshToken: tokens.refreshToken,
-    };
+    return tokens;
   }
 }
