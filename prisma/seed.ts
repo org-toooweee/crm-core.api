@@ -26,6 +26,16 @@ const main = async () => {
       birthdate: new Date(),
     },
   });
+
+  const taskStatuses = ['Pending', 'Done', 'Archived', 'Review'];
+
+  for (const name of taskStatuses) {
+    await prisma.taskStatus.create({
+      data: {
+        name,
+      },
+    });
+  }
 };
 
 main()

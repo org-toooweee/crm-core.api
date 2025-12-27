@@ -25,6 +25,10 @@ export class RefreshCommandHandler implements ICommandHandler<
   ) {}
 
   async execute(command: RefreshCommand) {
+    if (!command.token) {
+      throw new RefreshTokenExpiredException();
+    }
+
     const tokenFromDb = await this.tokenRepository.findByToken(command.token);
 
     if (!tokenFromDb || tokenFromDb.isExpired()) {

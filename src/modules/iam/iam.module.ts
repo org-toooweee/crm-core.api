@@ -21,6 +21,11 @@ import { UserPersistenceMapper } from './infra/mappers/user.persistence.mapper';
 import { UserResponseMapper } from './presentation/mappers/user.response.mapper';
 import { AuthService } from './application/auth/auth.service';
 import { LoginCommandHandler } from './application/auth/commands/login/login.command-handler';
+import { RefreshCommandHandler } from './application/auth/commands/refresh/refresh.command-handler';
+import { LogoutCommandHandler } from './application/auth/commands/logout/logout.command-handler';
+import { JwtStrategy } from './infra/strategies/jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './infra/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -42,9 +47,12 @@ import { LoginCommandHandler } from './application/auth/commands/login/login.com
     CreateUserCommandHandler,
     FindUsersQueryHandler,
     LoginCommandHandler,
+    RefreshCommandHandler,
+    LogoutCommandHandler,
     UserPersistenceMapper,
     UserResponseMapper,
     AuthService,
+    JwtStrategy,
     {
       provide: USER_REPOSITORY,
       useClass: UserRepository,
@@ -60,6 +68,10 @@ import { LoginCommandHandler } from './application/auth/commands/login/login.com
     {
       provide: JWT_TOKEN_SERVICE,
       useClass: JwtTokenService,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
     },
   ],
 })

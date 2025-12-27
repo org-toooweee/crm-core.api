@@ -5,6 +5,8 @@ import { JwtPayload } from './auth.types';
 import { JwtTokenServicePort } from './ports/jwt-token.service.port';
 import { randomUUID } from 'crypto';
 import { RefreshTokenEntity } from '../../domain/auth/entities/refresh-token.entity';
+import { EnvService } from '@infra/env/env.service';
+import { add } from 'date-fns';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +15,7 @@ export class AuthService {
     private readonly jwtService: JwtTokenServicePort,
     @Inject(TOKEN_REPOSITORY)
     private readonly refreshTokenRepository: RefreshTokenRepositoryPort,
+    private readonly envService: EnvService,
   ) {}
 
   async refreshTokens(payload: JwtPayload, userAgent: string) {
@@ -22,12 +25,18 @@ export class AuthService {
       id: randomUUID(),
       token: tokens.refreshToken,
       userId: payload.sub,
-      userAgent,
-      expiresAt: new Date(),
+      userAgent: userAgent || 'unknown',
+      expiresAt: new Date(
+        add(new Date(), { days: this.getRefreshTokenExpiresEnv() }),
+      ),
     });
 
     await this.refreshTokenRepository.upsert(refreshToken);
 
     return tokens;
+  }
+
+  private getRefreshTokenExpiresEnv() {
+    return parseInt(this.envService.get('JWT_RT_EXPIRES'));
   }
 }

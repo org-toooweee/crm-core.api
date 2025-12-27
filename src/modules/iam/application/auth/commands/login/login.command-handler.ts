@@ -25,7 +25,7 @@ export class LoginCommandHandler implements ICommandHandler<
   ) {}
 
   async execute(command: LoginCommand) {
-    const { email, password } = command;
+    const { email, password, useragent } = command;
 
     const user = await this.userRepository.findByEmail(email);
 
@@ -42,6 +42,6 @@ export class LoginCommandHandler implements ICommandHandler<
       role: user.getProps().role.value,
     };
 
-    return await this.authService.refreshTokens(payload, '');
+    return await this.authService.refreshTokens(payload, useragent);
   }
 }
